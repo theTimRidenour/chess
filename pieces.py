@@ -1,9 +1,4 @@
 color = ('BLACK', 'WHITE')
-kings = []
-queens = []
-bishops = []
-rooks = []
-pawns = []
 
 class King:
     def __init__(self, color, x, y, img):
@@ -13,21 +8,21 @@ class King:
         self.img = img
         self.has_moved = False
 
-    def draw(self, window):
-        window.blit(self.img, (self.x, self.y))
+    def draw(self, window, x, y):
+        window.blit(self.img, (x, y))
 
     def get_moves():
         return {'forward': [(1, 0)], 'forward-right': [(1, 1)], 'right': [(0, 1)], 'backward-right': [(-1, 1)], 'backward': [(-1, 0)], 'backward-left': [(-1, -1)], 'left': [(0, -1)], 'forward-left': [(1, -1)]}
 
     def get_special_moves(self):
         moves = {}
-        if not self.has_moved:
-            for rook in rooks:
-                if rook.get_color == self.get_color and not rook.get_has_moved:
-                    if rook.get_x < self.get_x:
-                        moves += {(self, (0, -2)): (rook, (0, 3))}
-                    else:
-                        moves += {(self, (0, 2)): (rook, 0, -2)}
+        #if not self.has_moved:
+        #    for rook in rooks:
+        #        if rook.get_color == self.get_color and not rook.get_has_moved:
+        #            if rook.get_x < self.get_x:
+        #                moves += {(self, (0, -2)): (rook, (0, 3))}
+        #            else:
+        #                moves += {(self, (0, 2)): (rook, 0, -2)}
         return moves
 
     def get_has_moved(self):
@@ -36,8 +31,14 @@ class King:
     def get_x(self):
         return self.x
 
+    def set_x(self, x):
+        self.x = x
+
     def get_y(self):
         return self.y
+
+    def set_y(self, y):
+        self.y = y
 
     def get_color(self):
         return self.color
