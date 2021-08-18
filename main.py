@@ -12,7 +12,7 @@ bd.add_piece(black_king)
 
 def main():
     run = True
-    FPS = 60
+    FPS = 12
     clock = pygame.time.Clock()
 
     def redraw_window():
@@ -38,5 +38,7 @@ def main():
             bd.move_piece(black_king, black_king.get_x() - 1, black_king.get_y())
         if keys[pygame.K_RIGHT] and black_king.get_x() != 7:
             bd.move_piece(black_king, black_king.get_x() + 1, black_king.get_y())
+        if keys[pygame.K_c]:
+            print(black_king.get_moves())
 
 main()
