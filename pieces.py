@@ -11,8 +11,26 @@ class King:
     def draw(self, window, x, y):
         window.blit(self.img, (x, y))
 
-    def get_moves():
-        return {'forward': [(1, 0)], 'forward-right': [(1, 1)], 'right': [(0, 1)], 'backward-right': [(-1, 1)], 'backward': [(-1, 0)], 'backward-left': [(-1, -1)], 'left': [(0, -1)], 'forward-left': [(1, -1)]}
+    def get_moves(self):
+        moves = []
+        if self.x > 0:
+            moves.append((0, -1))
+            if self.y > 0:
+                moves.append((1, -1))
+        if self.x < 7:
+            moves.append((0, 1))
+            if self.y < 7:
+                moves.append((-1, 1))
+        if self.y > 0:
+            moves.append((1, 0))
+            if self.x < 7:
+                moves.append((1, 1))
+        if self.y < 7:
+            moves.append((-1, 0))
+            if self.x > 0:
+                moves.append((-1, -1))
+
+        return moves
 
     def get_special_moves(self):
         moves = {}
