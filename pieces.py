@@ -43,6 +43,9 @@ class King:
     def get_color(self):
         return self.color
 
+    def get_image(self):
+        return self.img
+
 class Queen:
     def __init__(self, color, x, y, img):
         self.color = color

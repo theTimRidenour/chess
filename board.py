@@ -17,6 +17,8 @@ class Board:
         for row in board:
             print(row)
 
-    def draw_pieces():
-        pass
-
+    def draw_pieces(window):
+        for row in board:
+            for piece in row:
+                if piece != None:
+                    window.blit(piece.get_image(), (int(piece.get_x() * 93.75), int(piece.get_y() * 93.75)))

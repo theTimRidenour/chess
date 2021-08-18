@@ -17,7 +17,7 @@ def main():
 
     def redraw_window():
         graphics.WIN.blit(graphics.BG, (0, 0))
-        bd.draw_pieces()
+        bd.draw_pieces(graphics.WIN)
 
         pygame.display.update()
 
@@ -28,5 +28,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_DOWN] and black_king.get_y() != 7:
+            bd.move_piece(black_king, black_king.get_x(), black_king.get_y() + 1)
+        if keys[pygame.K_UP] and black_king.get_y() != 0:
+            bd.move_piece(black_king, black_king.get_x(), black_king.get_y() - 1)
+        if keys[pygame.K_LEFT] and black_king.get_x() != 0:
+            bd.move_piece(black_king, black_king.get_x() - 1, black_king.get_y())
+        if keys[pygame.K_RIGHT] and black_king.get_x() != 7:
+            bd.move_piece(black_king, black_king.get_x() + 1, black_king.get_y())
 
 main()
