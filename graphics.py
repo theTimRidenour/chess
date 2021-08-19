@@ -7,6 +7,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Chess")
 
 BG = pygame.image.load(os.path.join('assets', 'board.png'))
+PLAYER = pygame.image.load(os.path.join('assets', 'player.png'))
 
 #Pieces
 BLACK_KING = pygame.image.load(os.path.join('assets', 'black-king.png'))

@@ -1,5 +1,29 @@
 color = ('BLACK', 'WHITE')
 
+class Player:
+    def __init__(self, x, y, img):
+        self.x = x
+        self.y = y
+        self.img = img
+
+    def draw(self, window, x, y):
+        window.blit(self.img, (x, y))
+
+    def get_x(self):
+        return self.x
+
+    def set_x(self, x):
+        self.x = x
+
+    def get_y(self):
+        return self.y
+
+    def set_y(self, y):
+        self.y = y
+
+    def get_image(self):
+        return self.img
+
 class King:
     def __init__(self, color, x, y, img):
         self.color = color
