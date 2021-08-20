@@ -14,3 +14,5 @@ ATTACK_SQARE = pygame.image.load(os.path.join('assets', 'attack_square.png'))
 #Pieces
 BLACK_KING = pygame.image.load(os.path.join('assets', 'black-king.png'))
 WHITE_KING = pygame.image.load(os.path.join('assets', 'white-king.png'))
+BLACK_QUEEN = pygame.image.load(os.path.join('assets', 'black-queen.png'))
+WHITE_QUEEN = pygame.image.load(os.path.join('assets', 'white-queen.png'))

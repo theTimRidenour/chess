@@ -7,11 +7,15 @@ from actions import action
 player = pieces.Player(0, 0, graphics.PLAYER)
 
 white_king = pieces.King(pieces.color[1], 4, 7, graphics.WHITE_KING)
+white_queen = pieces.Queen(pieces.color[1], 3, 7, graphics.WHITE_QUEEN)
 
 black_king = pieces.King(pieces.color[0], 4, 0, graphics.BLACK_KING)
+black_queen = pieces.Queen(pieces.color[0], 3, 0, graphics.BLACK_QUEEN)
 
 bd.add_piece(white_king)
+bd.add_piece(white_queen)
 bd.add_piece(black_king)
+bd.add_piece(black_queen)
 bd.add_player(player)
 
 def main():
