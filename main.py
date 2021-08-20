@@ -24,6 +24,7 @@ def main():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
         bd.draw_safe_squares(graphics.WIN, graphics.SAFE_SQUARE)
+        bd.draw_attack_squares(graphics.WIN, graphics.ATTACK_SQARE)
         bd.draw_player(graphics.WIN, player)
 
         pygame.display.update()
