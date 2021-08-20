@@ -38,21 +38,21 @@ class King:
     def get_moves(self):
         moves = []
         if self.x > 0:
-            moves.append((0, -1))
-            if self.y > 0:
-                moves.append((1, -1))
-        if self.x < 7:
-            moves.append((0, 1))
-            if self.y < 7:
-                moves.append((-1, 1))
-        if self.y > 0:
-            moves.append((1, 0))
-            if self.x < 7:
-                moves.append((1, 1))
-        if self.y < 7:
             moves.append((-1, 0))
-            if self.x > 0:
+            if self.y > 0:
                 moves.append((-1, -1))
+        if self.x < 7:
+            moves.append((1, 0))
+            if self.y < 7:
+                moves.append((1, 1))
+        if self.y > 0:
+            moves.append((0, -1))
+            if self.x < 7:
+                moves.append((1, -1))
+        if self.y < 7:
+            moves.append((0, 1))
+            if self.x > 0:
+                moves.append((-1, 1))
 
         return moves
 

@@ -44,5 +44,4 @@ class Board:
         for row in move_board:
             for square in row:
                 if square != None:
-                    print('yes')
                     window.blit(img_not_occ, (int(square[0] * 93.75), int(square[1] * 93.75)))
