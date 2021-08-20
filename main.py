@@ -23,6 +23,7 @@ def main():
     def redraw_window():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
+        bd.draw_safe_squares(graphics.WIN, graphics.SAFE_SQUARE)
         bd.draw_player(graphics.WIN, player)
 
         pygame.display.update()
@@ -48,7 +49,7 @@ def main():
         if keys[pygame.K_RIGHT] and player.get_x() != 7 and key_up:
             bd.move_player(player, player.get_x() + 1, player.get_y())
             key_up = False
-        if keys[pygame.K_a]:
+        if keys[pygame.K_SPACE] and key_up:
             action(player)
             key_up = False
         if event.type == pygame.KEYUP:

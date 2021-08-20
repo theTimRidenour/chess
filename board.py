@@ -1,5 +1,6 @@
 board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
 player_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+move_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
 
 class Board:
     def add_piece(object):
@@ -38,3 +39,10 @@ class Board:
 
     def draw_player(window, player):
         window.blit(player.get_image(), (int(player.get_x() * 93.75), int(player.get_y() * 93.75)))
+
+    def draw_safe_squares(window, img_not_occ):
+        for row in move_board:
+            for square in row:
+                if square != None:
+                    print('yes')
+                    window.blit(img_not_occ, (int(square[0] * 93.75), int(square[1] * 93.75)))

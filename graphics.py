@@ -8,6 +8,7 @@ pygame.display.set_caption("Chess")
 
 BG = pygame.image.load(os.path.join('assets', 'board.png'))
 PLAYER = pygame.image.load(os.path.join('assets', 'player.png'))
+SAFE_SQUARE = pygame.image.load(os.path.join('assets', 'safe_square.png'))
 
 #Pieces
 BLACK_KING = pygame.image.load(os.path.join('assets', 'black-king.png'))
