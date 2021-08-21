@@ -1,7 +1,7 @@
 import board
 
-
 color = ('BLACK', 'WHITE')
+removed_pieces = []
 
 class Player:
     def __init__(self, x, y, img):
