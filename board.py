@@ -28,10 +28,6 @@ class Board:
         object.set_y(new_y)
         Board.add_player(object)
 
-    def display_board():
-        for row in board:
-            print(row)
-
     def draw_pieces(window):
         for row in board:
             for piece in row:
