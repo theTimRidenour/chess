@@ -8,14 +8,22 @@ player = pieces.Player(0, 0, graphics.PLAYER)
 
 white_king = pieces.King(pieces.color[1], 4, 7, graphics.WHITE_KING)
 white_queen = pieces.Queen(pieces.color[1], 3, 7, graphics.WHITE_QUEEN)
+white_bishop1 = pieces.Bishop(pieces.color[1], 5, 7, graphics.WHITE_BISHOP)
+white_bishop2 = pieces.Bishop(pieces.color[1], 2, 7, graphics.WHITE_BISHOP)
 
 black_king = pieces.King(pieces.color[0], 4, 0, graphics.BLACK_KING)
 black_queen = pieces.Queen(pieces.color[0], 3, 0, graphics.BLACK_QUEEN)
+black_bishop1 = pieces.Bishop(pieces.color[0], 5, 0, graphics.BLACK_BISHOP)
+black_bishop2 = pieces.Bishop(pieces.color[0], 2, 0, graphics.BLACK_BISHOP)
 
 bd.add_piece(white_king)
 bd.add_piece(white_queen)
+bd.add_piece(white_bishop1)
+bd.add_piece(white_bishop2)
 bd.add_piece(black_king)
 bd.add_piece(black_queen)
+bd.add_piece(black_bishop1)
+bd.add_piece(black_bishop2)
 bd.add_player(player)
 
 def main():
