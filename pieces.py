@@ -1,6 +1,8 @@
 import board
+import graphics
 
 color = ('BLACK', 'WHITE')
+cnt = 1
 removed_pieces = []
 
 class Player:
@@ -37,6 +39,9 @@ class King:
 
     def draw(self, window, x, y):
         window.blit(self.img, (x, y))
+
+    def set_has_moved(self, b):
+        self.has_moved = b
 
     def get_moves(self):
         moves = []
@@ -101,6 +106,9 @@ class Queen:
 
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
+
+    def set_has_moved(self, b):
+        self.has_moved = b
 
     def get_moves(self):
         moves = []
@@ -219,6 +227,9 @@ class Bishop:
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
 
+    def set_has_moved(self, b):
+        self.has_moved = b
+
     def get_moves(self):
         moves = []
         if self.x > 0 and self.y > 0:
@@ -293,6 +304,9 @@ class Knight:
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
 
+    def set_has_moved(self, b):
+        self.has_moved = b
+
     def get_moves(self):
         moves = []
         if self.x - 2 >= 0:
@@ -348,6 +362,9 @@ class Rook:
 
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
+
+    def set_has_moved(self, b):
+        self.has_moved = b
 
     def get_moves(self):
         moves = []
@@ -414,8 +431,22 @@ class Pawn:
         self.img = img
         self.has_moved = False
 
+    def convert_pawn(self):
+        global cnt
+        name = 'p' + str(cnt)
+        cnt += 1
+        if self.color == 'BLACK':
+            img = graphics.BLACK_QUEEN
+        else:
+            img = graphics.WHITE_QUEEN
+        globals()[name] = Queen(self.color, self.x, self.y, img)
+        board.board[self.y][self.x] = globals()[name]
+
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
+
+    def set_has_moved(self, b):
+        self.has_moved = b
 
     def get_moves(self):
         moves = []

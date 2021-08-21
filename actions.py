@@ -35,6 +35,7 @@ def action(player):
         board.move_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
         board.attack_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
         active_player = False
+        active_object.set_has_moved(True)
         active_object = None
         if current_player == 'BLACK':
             current_player = 'WHITE'
@@ -48,8 +49,28 @@ def action(player):
         board.move_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
         board.attack_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
         active_player = False
+        active_object.set_has_moved(True)
         active_object = None
         if current_player == 'BLACK':
             current_player = 'WHITE'
         else:
             current_player = 'BLACK'
+
+    check_pawns()
+    check_for_check()
+    check_for_checkmate()
+
+def check_pawns():
+    for object in board.board[0]:
+        if isinstance(object, pieces.Pawn):
+            object.convert_pawn()
+    for object in board.board[7]:
+        if isinstance(object, pieces.Pawn):
+            object.convert_pawn()
+
+def check_for_check():
+    pass
+
+def check_for_checkmate():
+    pass
+
