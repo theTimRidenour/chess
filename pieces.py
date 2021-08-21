@@ -293,6 +293,51 @@ class Knight:
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
 
+    def get_moves(self):
+        moves = []
+        if self.x - 2 >= 0:
+            if self.y - 1 >= 0:
+                moves.append((-2, -1))
+            if self.y + 1 <= 7:
+                moves.append((-2, 1))
+        if self.x + 2 <= 7:
+            if self.y - 1 >= 0:
+                moves.append((2, -1))
+            if self.y + 1 <= 7:
+                moves.append((2, 1))
+        if self.y - 2 >= 0:
+            if self.x - 1 >= 0:
+                moves.append((-1, -2))
+            if self.x + 1 <= 7:
+                moves.append((1, -2))
+        if self.y + 2 <= 7:
+            if self.x - 1 >= 0:
+                moves.append((-1, 2))
+            if self.x + 1 <= 7:
+                moves.append((1, 2))
+        return moves
+
+    def get_has_moved(self):
+        return self.has_moved
+
+    def get_x(self):
+        return self.x
+
+    def set_x(self, x):
+        self.x = x
+
+    def get_y(self):
+        return self.y
+
+    def set_y(self, y):
+        self.y = y
+
+    def get_color(self):
+        return self.color
+
+    def get_image(self):
+        return self.img
+
 class Rook:
     def __init__(self, color, x, y, img):
         self.color = color
@@ -303,6 +348,63 @@ class Rook:
 
     def draw(self, window):
         window.blit(self.img, (self.x, self.y))
+
+    def get_moves(self):
+        moves = []
+        if self.x > 0:
+            i = 1
+            while i <= self.x:
+                moves.append((-i, 0))
+                if board.board[self.y][self.x - i] != None:
+                    break
+                else:
+                    i += 1
+        if self.x < 7:
+            i = self.x + 1
+            while i <= 7:
+                moves.append((i - self.x, 0))
+                if board.board[self.y][i] != None:
+                    break
+                else:
+                    i += 1
+        if self.y > 0:
+            i = 1
+            while i <= self.y:
+                moves.append((0, -i))
+                if board.board[self.y - i][self.x] != None:
+                    break
+                else:
+                    i += 1
+        if self.y < 7:
+            i = self.y + 1
+            while i <= 7:
+                moves.append((0, i - self.y))
+                if board.board[i][self.x] != None:
+                    break
+                else:
+                    i += 1
+        return moves
+
+    def get_has_moved(self):
+        return self.has_moved
+
+    def get_x(self):
+        return self.x
+
+    def set_x(self, x):
+        self.x = x
+
+    def get_y(self):
+        return self.y
+
+    def set_y(self, y):
+        self.y = y
+
+    def get_color(self):
+        return self.color
+
+    def get_image(self):
+        return self.img
 
 class Pawn:
     def __init__(self, color, x, y, img):
