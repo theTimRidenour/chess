@@ -423,19 +423,19 @@ class Pawn:
         if self.color == 'WHITE':
             a = -1
         if (self.y == 1 or self.y == 6) and not self.has_moved:
-            if board.board[self.y + (a * 2)][self.x] == None:
+            if board.board[self.y + (a * 2)][self.x] == None and board.board[self.y + a][self.x] == None:
                 moves.append((0, a * 2))
         if (self.y > 0 and self.color == 'WHITE') or (self.y < 7 and self.color == 'BLACK'):
-            if board.board[self.y + (a * 1)][self.x] == None:
-                moves.append((0, a * 1))
+            if board.board[self.y + a][self.x] == None:
+                moves.append((0, a))
             if self.x - 1 >= 0:
-                if board.board[self.y + (a * 1)][self.x - 1] != None:
-                    if (a == 1 and board.board[self.y + (a * 1)][self.x - 1].color == 'WHITE') or (a == -1 and board.board[self.y + (a * 1)][self.x - 1].color == 'BLACK'):
-                        moves.append((-1, a * 1))
+                if board.board[self.y + a][self.x - 1] != None:
+                    if (a == 1 and board.board[self.y + a][self.x - 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x - 1].color == 'BLACK'):
+                        moves.append((-1, a))
             if self.x + 1 <= 7:
-                if board.board[self.y + (a * 1)][self.x + 1] != None:
-                    if (a == 1 and board.board[self.y + (a * 1)][self.x + 1].color == 'WHITE') or (a == -1 and board.board[self.y + (a * 1)][self.x + 1].color == 'BLACK'):
-                        moves.append((1, a * 1))
+                if board.board[self.y + (a)][self.x + 1] != None:
+                    if (a == 1 and board.board[self.y + a][self.x + 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x + 1].color == 'BLACK'):
+                        moves.append((1, a))
         return moves
 
     def get_has_moved(self):
