@@ -2,7 +2,7 @@ import graphics
 import pygame
 import pieces
 from board import Board as bd
-from actions import action
+from actions import action, check_for_check
 
 player = pieces.Player(0, 0, graphics.PLAYER)
 bd.add_player(player)
@@ -18,6 +18,7 @@ def main():
     def redraw_window():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
+        check_for_check()
         bd.draw_safe_squares(graphics.WIN, graphics.SAFE_SQUARE)
         bd.draw_attack_squares(graphics.WIN, graphics.ATTACK_SQARE)
         bd.draw_player(graphics.WIN, player)

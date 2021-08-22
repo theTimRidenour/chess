@@ -4,6 +4,8 @@ import pieces
 current_player = 'BLACK'
 active_player = False
 active_object = None
+black_king_obj = None
+white_king_obj = None
 
 def action(player):
     global active_player
@@ -77,8 +79,27 @@ def check_pawns():
             object.convert_pawn()
 
 def check_for_check():
-    pass
-
+    if not kings_identitfied():
+        return None
+    # check if black king is in check
+    if black_king_obj.check():
+        print ('BLACK KING CHECK')
+    if white_king_obj.check():
+        print ('WHITE KING CHECK')
+    
 def check_for_checkmate():
     pass
+
+def kings_identitfied():
+    global black_king_obj, white_king_obj
+    if black_king_obj == None or white_king_obj == None:
+        for row in board.board:
+            for object in row:
+                if object != None:
+                    if isinstance(object, (pieces.King)):
+                        if object.color == 'BLACK':
+                            black_king_obj = object
+                        else:
+                            white_king_obj = object 
+    return True
 

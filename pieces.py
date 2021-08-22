@@ -43,6 +43,157 @@ class King:
     def set_has_moved(self, b):
         self.has_moved = b
 
+    def check(self):
+        king_moves = self.get_moves() # gets moves for king check
+        queen_moves = []
+        bishop_moves = []
+        rook_moves = []
+        knight_moves = []
+        pawn_moves = []
+
+        # get moves for queen, bishop, and rook check
+        if self.x > 0:
+            i = 1
+            while i <= self.x:
+                queen_moves.append((-i, 0))
+                rook_moves.append((-i, 0))
+                if board.board[self.y][self.x - i] != None:
+                    break
+                else:
+                    i += 1
+            if self.y > 0:
+                i = 1
+                while i <= self.x and i <= self.y:
+                    queen_moves.append((-i, -i))
+                    bishop_moves.append((-i, -i))
+                    if board.board[self.y - i][self.x - i] != None:
+                        break
+                    else:
+                        i += 1
+        if self.x < 7:
+            i = self.x + 1
+            while i <= 7:
+                queen_moves.append((i - self.x, 0))
+                rook_moves.append((i - self.x, 0))
+                if board.board[self.y][i] != None:
+                    break
+                else:
+                    i += 1
+            if self.y < 7:
+                i = self.x + 1
+                j = self.y + 1
+                while i <= 7 and j <= 7:
+                    queen_moves.append((i - self.x, j - self.y))
+                    bishop_moves.append((i - self.x, j - self.y))
+                    if board.board[j][i] != None:
+                        break
+                    else:
+                        i += 1
+                        j += 1
+        if self.y > 0:
+            i = 1
+            while i <= self.y:
+                queen_moves.append((0, -i))
+                rook_moves.append((0, -i))
+                if board.board[self.y - i][self.x] != None:
+                    break
+                else:
+                    i += 1
+            if self.x < 7:
+                i = self.x + 1
+                j = 1
+                while j <= self.y and i <= 7:
+                    queen_moves.append((i - self.x, -j))
+                    bishop_moves.append((i - self.x, -j))
+                    if board.board[self.y - j][i] != None:
+                        break
+                    else:
+                        i += 1
+                        j += 1
+        if self.y < 7:
+            i = self.y + 1
+            while i <= 7:
+                queen_moves.append((0, i - self.y))
+                rook_moves.append((0, i - self.y))
+                if board.board[i][self.x] != None:
+                    break
+                else:
+                    i += 1
+            if self.x > 0:
+                i = 1
+                j = self.y + 1
+                while i <= self.x and j <= 7:
+                    queen_moves.append((-i, j - self.y))
+                    bishop_moves.append((-i, j - self.y))
+                    if board.board[j][self.x - i] != None:
+                        break
+                    else:
+                        i += 1
+                        j += 1
+        
+        # get moves for knight check
+        if self.x - 2 >= 0:
+            if self.y - 1 >= 0:
+                knight_moves.append((-2, -1))
+            if self.y + 1 <= 7:
+                knight_moves.append((-2, 1))
+        if self.x + 2 <= 7:
+            if self.y - 1 >= 0:
+                knight_moves.append((2, -1))
+            if self.y + 1 <= 7:
+                knight_moves.append((2, 1))
+        if self.y - 2 >= 0:
+            if self.x - 1 >= 0:
+                knight_moves.append((-1, -2))
+            if self.x + 1 <= 7:
+                knight_moves.append((1, -2))
+        if self.y + 2 <= 7:
+            if self.x - 1 >= 0:
+                knight_moves.append((-1, 2))
+            if self.x + 1 <= 7:
+                knight_moves.append((1, 2))
+
+        # get moves for pawn check
+        a = 1
+        if self.color == 'WHITE':
+            a = -1
+        if (self.y > 0 and self.color == 'WHITE') or (self.y < 7 and self.color == 'BLACK'):
+            if self.x - 1 >= 0:
+                if board.board[self.y + a][self.x - 1] != None:
+                    if (a == 1 and board.board[self.y + a][self.x - 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x - 1].color == 'BLACK'):
+                        pawn_moves.append((-1, a))
+            if self.x + 1 <= 7:
+                if board.board[self.y + (a)][self.x + 1] != None:
+                    if (a == 1 and board.board[self.y + a][self.x + 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x + 1].color == 'BLACK'):
+                        pawn_moves.append((1, a))
+
+
+
+        for move in king_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (King)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+        for move in queen_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Queen)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+        for move in bishop_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Bishop)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+        for move in rook_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Rook)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+        for move in knight_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Knight)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+        for move in pawn_moves:
+            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Pawn)):
+                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+                    return True
+
     def get_moves(self):
         moves = []
         if self.x == 4 and not self.has_moved:
@@ -176,17 +327,6 @@ class Queen:
                     else:
                         i += 1
                         j += 1
-        return moves
-
-    def get_special_moves(self):
-        moves = {}
-        #if not self.has_moved:
-        #    for rook in rooks:
-        #        if rook.get_color == self.get_color and not rook.get_has_moved:
-        #            if rook.get_x < self.get_x:
-        #                moves += {(self, (0, -2)): (rook, (0, 3))}
-        #            else:
-        #                moves += {(self, (0, 2)): (rook, 0, -2)}
         return moves
 
     def get_has_moved(self):
