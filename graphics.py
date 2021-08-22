@@ -10,6 +10,7 @@ BG = pygame.image.load(os.path.join('assets', 'board.png'))
 PLAYER = pygame.image.load(os.path.join('assets', 'player.png'))
 SAFE_SQUARE = pygame.image.load(os.path.join('assets', 'safe_square.png'))
 ATTACK_SQARE = pygame.image.load(os.path.join('assets', 'attack_square.png'))
+ROOK_SQUARE = pygame.image.load(os.path.join('assets', 'rook_square.png'))
 
 #Pieces
 BLACK_KING = pygame.image.load(os.path.join('assets', 'black-king.png'))

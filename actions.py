@@ -17,7 +17,10 @@ def action(player):
                     x = current_object.get_x() + coor[0]
                     y = current_object.get_y() + coor[1]
                     if board.board[y][x] == None:
-                        board.move_board[y][x] = (x, y)
+                        if len(coor) != 3:
+                            board.move_board[y][x] = (x, y)
+                        else:
+                            board.move_board[y][x] = (x, y, True)
                         active_player = True
                         active_object = current_object
                     elif board.board[y][x].get_color() != current_player:
@@ -31,6 +34,11 @@ def action(player):
         active_object = None
     
     elif board.move_board[player.get_y()][player.get_x()] != None:
+        if isinstance(active_object, (pieces.King)) and abs(player.get_x() - active_object.get_x()) == 2:
+            if player.get_x() < active_object.get_x():
+                board.Board.move_piece(board.board[active_object.get_y()][active_object.get_x() - 4], player.get_x() + 1, player.get_y())
+            else:
+                board.Board.move_piece(board.board[active_object.get_y()][active_object.get_x() + 3], player.get_x() - 1, player.get_y())
         board.Board.move_piece(active_object, player.get_x(), player.get_y())
         board.move_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
         board.attack_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]

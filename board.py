@@ -1,3 +1,5 @@
+from graphics import ROOK_SQUARE
+
 board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
 player_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
 move_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
@@ -41,7 +43,10 @@ class Board:
         for row in move_board:
             for square in row:
                 if square != None:
-                    window.blit(img_not_occ, (int(square[0] * 93.75), int(square[1] * 93.75)))
+                    if len(square) != 3:
+                        window.blit(img_not_occ, (int(square[0] * 93.75), int(square[1] * 93.75)))
+                    else:
+                        window.blit(ROOK_SQUARE, (int(square[0] * 93.75), int(square[1] * 93.75)))
     
     def draw_attack_squares(window, img_not_occ):
         for row in attack_board:

@@ -45,6 +45,11 @@ class King:
 
     def get_moves(self):
         moves = []
+        if self.x == 4 and not self.has_moved:
+            if board.board[self.y][self.x -3] == None and board.board[self.y][self.x -2] == None and board.board[self.y][self.x -1] == None and isinstance(board.board[self.y][self.x - 4], (Rook)):
+                    moves.append((-2, 0, True))
+            if board.board[self.y][self.x +1] == None and board.board[self.y][self.x +2] == None and isinstance(board.board[self.y][self.x + 3], (Rook)):
+                    moves.append((2, 0, True))
         if self.x > 0:
             moves.append((-1, 0))
             if self.y > 0:
@@ -62,17 +67,6 @@ class King:
             if self.x > 0:
                 moves.append((-1, 1))
 
-        return moves
-
-    def get_special_moves(self):
-        moves = {}
-        #if not self.has_moved:
-        #    for rook in rooks:
-        #        if rook.get_color == self.get_color and not rook.get_has_moved:
-        #            if rook.get_x < self.get_x:
-        #                moves += {(self, (0, -2)): (rook, (0, 3))}
-        #            else:
-        #                moves += {(self, (0, 2)): (rook, 0, -2)}
         return moves
 
     def get_has_moved(self):
