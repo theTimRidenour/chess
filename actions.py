@@ -82,24 +82,28 @@ def check_for_check():
     if not kings_identitfied():
         return None
     # check if black king is in check
-    if black_king_obj.check():
-        print ('BLACK KING CHECK')
-    if white_king_obj.check():
-        print ('WHITE KING CHECK')
+    if black_king_obj != None:
+        if black_king_obj.check():
+            return True
+    if white_king_obj != None:
+        if white_king_obj.check():
+            return True
+    return False
     
 def check_for_checkmate():
-    pass
+    return False
 
 def kings_identitfied():
     global black_king_obj, white_king_obj
-    if black_king_obj == None or white_king_obj == None:
-        for row in board.board:
-            for object in row:
-                if object != None:
-                    if isinstance(object, (pieces.King)):
-                        if object.color == 'BLACK':
-                            black_king_obj = object
-                        else:
-                            white_king_obj = object 
+    black_king_obj, white_king_obj = None, None
+    for row in board.board:
+        for object in row:
+            if object != None:
+                if isinstance(object, (pieces.King)):
+                    if object.color == 'BLACK':
+                        black_king_obj = object
+                    else:
+                        white_king_obj = object
+
     return True
 
