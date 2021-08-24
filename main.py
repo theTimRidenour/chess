@@ -18,13 +18,15 @@ def main():
     def redraw_window():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
-        if check_for_check():
-            if check_for_checkmate():
-                print('Checkmate!')
-                while True:
-                    pass
-            else:
-                print('Check')
+        check = check_for_check()
+        if check[0]:
+            if check[1] != None:
+                if check_for_checkmate(check[1]):
+                    print('Checkmate!')
+                    while True:
+                        pass
+                else:
+                    print('Check:', check[1])
         bd.draw_safe_squares(graphics.WIN, graphics.SAFE_SQUARE)
         bd.draw_attack_squares(graphics.WIN, graphics.ATTACK_SQARE)
         bd.draw_player(graphics.WIN, player)

@@ -78,19 +78,19 @@ def check_pawns():
         if isinstance(object, pieces.Pawn):
             object.convert_pawn()
 
-def check_for_check():
+def check_for_check(brd = board.board, king = None):
     if not kings_identitfied():
         return None
     # check if black king is in check
-    if black_king_obj != None:
-        if black_king_obj.check():
-            return True
-    if white_king_obj != None:
-        if white_king_obj.check():
-            return True
-    return False
+    if black_king_obj != None and (king == None or king == 'BLACK'):
+        if black_king_obj.check(brd):
+            return [True, 'BLACK']
+    if white_king_obj != None and (king == None or king == 'WHITE'):
+        if white_king_obj.check(brd):
+            return [True, 'WHITE']
+    return [False, None]
     
-def check_for_checkmate():
+def check_for_checkmate(king = None):
     return False
 
 def kings_identitfied():

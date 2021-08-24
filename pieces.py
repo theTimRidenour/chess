@@ -43,7 +43,7 @@ class King:
     def set_has_moved(self, b):
         self.has_moved = b
 
-    def check(self):
+    def check(self, brd):
         king_moves = self.get_moves() # gets moves for king check
         queen_moves = []
         bishop_moves = []
@@ -57,7 +57,7 @@ class King:
             while i <= self.x:
                 queen_moves.append((-i, 0))
                 rook_moves.append((-i, 0))
-                if board.board[self.y][self.x - i] != None:
+                if brd[self.y][self.x - i] != None:
                     break
                 else:
                     i += 1
@@ -66,7 +66,7 @@ class King:
                 while i <= self.x and i <= self.y:
                     queen_moves.append((-i, -i))
                     bishop_moves.append((-i, -i))
-                    if board.board[self.y - i][self.x - i] != None:
+                    if brd[self.y - i][self.x - i] != None:
                         break
                     else:
                         i += 1
@@ -75,7 +75,7 @@ class King:
             while i <= 7:
                 queen_moves.append((i - self.x, 0))
                 rook_moves.append((i - self.x, 0))
-                if board.board[self.y][i] != None:
+                if brd[self.y][i] != None:
                     break
                 else:
                     i += 1
@@ -85,7 +85,7 @@ class King:
                 while i <= 7 and j <= 7:
                     queen_moves.append((i - self.x, j - self.y))
                     bishop_moves.append((i - self.x, j - self.y))
-                    if board.board[j][i] != None:
+                    if brd[j][i] != None:
                         break
                     else:
                         i += 1
@@ -95,7 +95,7 @@ class King:
             while i <= self.y:
                 queen_moves.append((0, -i))
                 rook_moves.append((0, -i))
-                if board.board[self.y - i][self.x] != None:
+                if brd[self.y - i][self.x] != None:
                     break
                 else:
                     i += 1
@@ -105,7 +105,7 @@ class King:
                 while j <= self.y and i <= 7:
                     queen_moves.append((i - self.x, -j))
                     bishop_moves.append((i - self.x, -j))
-                    if board.board[self.y - j][i] != None:
+                    if brd[self.y - j][i] != None:
                         break
                     else:
                         i += 1
@@ -115,7 +115,7 @@ class King:
             while i <= 7:
                 queen_moves.append((0, i - self.y))
                 rook_moves.append((0, i - self.y))
-                if board.board[i][self.x] != None:
+                if brd[i][self.x] != None:
                     break
                 else:
                     i += 1
@@ -125,7 +125,7 @@ class King:
                 while i <= self.x and j <= 7:
                     queen_moves.append((-i, j - self.y))
                     bishop_moves.append((-i, j - self.y))
-                    if board.board[j][self.x - i] != None:
+                    if brd[j][self.x - i] != None:
                         break
                     else:
                         i += 1
@@ -159,39 +159,39 @@ class King:
             a = -1
         if (self.y > 0 and self.color == 'WHITE') or (self.y < 7 and self.color == 'BLACK'):
             if self.x - 1 >= 0:
-                if board.board[self.y + a][self.x - 1] != None:
-                    if (a == 1 and board.board[self.y + a][self.x - 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x - 1].color == 'BLACK'):
+                if brd[self.y + a][self.x - 1] != None:
+                    if (a == 1 and brd[self.y + a][self.x - 1].color == 'WHITE') or (a == -1 and brd[self.y + a][self.x - 1].color == 'BLACK'):
                         pawn_moves.append((-1, a))
             if self.x + 1 <= 7:
-                if board.board[self.y + (a)][self.x + 1] != None:
-                    if (a == 1 and board.board[self.y + a][self.x + 1].color == 'WHITE') or (a == -1 and board.board[self.y + a][self.x + 1].color == 'BLACK'):
+                if brd[self.y + (a)][self.x + 1] != None:
+                    if (a == 1 and brd[self.y + a][self.x + 1].color == 'WHITE') or (a == -1 and brd[self.y + a][self.x + 1].color == 'BLACK'):
                         pawn_moves.append((1, a))
 
 
 
         for move in king_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (King)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (King)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
         for move in queen_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Queen)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (Queen)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
         for move in bishop_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Bishop)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (Bishop)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
         for move in rook_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Rook)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (Rook)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
         for move in knight_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Knight)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (Knight)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
         for move in pawn_moves:
-            if isinstance(board.board[self.y + move[1]][self.x + move[0]], (Pawn)):
-                if self.color != board.board[self.y + move[1]][self.x + move[0]].get_color():
+            if isinstance(brd[self.y + move[1]][self.x + move[0]], (Pawn)):
+                if self.color != brd[self.y + move[1]][self.x + move[0]].get_color():
                     return True
 
     def get_moves(self):
