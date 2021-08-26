@@ -19,12 +19,12 @@ def main():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
         check = check_for_check()
-        if check[0] == True:
+        if check[0]:
             if check[1] != None:
                 if check_for_checkmate(check[1]):
-                    print('Checkmate!')
-                    while True:
-                        pass
+                    print ('Checkmate:', check[1])
+                    global run
+                    run = False
                 else:
                     print('Check:', check[1])
         bd.draw_safe_squares(graphics.WIN, graphics.SAFE_SQUARE)

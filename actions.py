@@ -1,6 +1,8 @@
 import board
 import pieces
 
+from copy import copy, deepcopy
+
 current_player = 'BLACK'
 active_player = False
 active_object = None
@@ -67,8 +69,6 @@ def action(player):
             current_player = 'BLACK'
 
     check_pawns()
-    check_for_check()
-    check_for_checkmate()
 
 def check_pawns():
     for object in board.board[0]:
@@ -91,6 +91,28 @@ def check_for_check(brd = board.board, king = None):
     return [False, None]
     
 def check_for_checkmate(king = None):
+    double_check = check_for_check(board.board, king)
+    if double_check[0] == True:
+        cnt = 1
+        obj_list = []
+        checkmate_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+        for row in board.board:
+            for object in row:
+                if object != None:
+                    locals()['obj' + str(cnt)] = copy(object)
+                    checkmate_board[object.get_y()][object.get_x()] = locals()['obj' + str(cnt)]
+                    if locals()['obj' + str(cnt)].get_color() == king:
+                        obj_list.append(locals()['obj' + str(cnt)])
+                    cnt += 1
+        for obj in obj_list:
+            check_moves = obj.get_moves()
+            for check_move in check_moves:
+                checkmove_board = checkmate_board[:]
+                checkmove_board[obj.get_y() + check_move[1]][obj.get_x() + check_move[0]] = obj
+                checkmove_board[obj.get_y()][obj.get_x()] = None
+                if check_for_check(checkmove_board, king)[0]:
+                    return False
+        return True
     return False
 
 def kings_identitfied():
