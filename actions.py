@@ -109,9 +109,13 @@ def check_for_checkmate(king = None):
             for check_move in check_moves:
                 checkmove_board = checkmate_board[:]
                 checkmove_board[obj.get_y() + check_move[1]][obj.get_x() + check_move[0]] = obj
+                obj.set_x(obj.get_x() + check_move[0])
+                obj.set_y(obj.get_y() + check_move[1])
                 checkmove_board[obj.get_y()][obj.get_x()] = None
                 if check_for_check(checkmove_board, king)[0]:
                     return False
+                obj.set_x(obj.get_x() - check_move[0])
+                obj.set_y(obj.get_y() - check_move[1])
         return True
     return False
 
