@@ -6,7 +6,7 @@ WIDTH, HEIGHT = 750, 750
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Chess")
 
-BG = pygame.image.load(os.path.join('assets', 'board.png'))
+BG = pygame.image.load(os.path.join('assets', 'board2.png'))
 PLAYER = pygame.image.load(os.path.join('assets', 'player.png'))
 SAFE_SQUARE = pygame.image.load(os.path.join('assets', 'safe_square.png'))
 ATTACK_SQARE = pygame.image.load(os.path.join('assets', 'attack_square.png'))

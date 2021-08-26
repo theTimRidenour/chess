@@ -19,7 +19,7 @@ def main():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
         check = check_for_check()
-        if check[0]:
+        if check[0] == True:
             if check[1] != None:
                 if check_for_checkmate(check[1]):
                     print('Checkmate!')
