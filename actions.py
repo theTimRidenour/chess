@@ -69,6 +69,15 @@ def action(player):
             current_player = 'BLACK'
 
     check_pawns()
+    check = check_for_check()
+    if check[0]:
+        if check[1] != None:
+            if check_for_checkmate(check[1]):
+                print ('Checkmate:', check[1])
+                globals()['run'] = False
+            else:
+                print('Check:', check[1])
+
 
 def check_pawns():
     for object in board.board[0]:
@@ -91,33 +100,45 @@ def check_for_check(brd = board.board, king = None):
     return [False, None]
     
 def check_for_checkmate(king = None):
-    double_check = check_for_check(board.board, king)
-    if double_check[0] == True:
-        cnt = 1
-        obj_list = []
-        checkmate_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+    if king != None:
+        x_val = black_king_obj.get_x() if king == 'BLACK' else white_king_obj.get_x()
+        y_val = black_king_obj.get_y() if king == 'BLACK' else white_king_obj.get_y()
+        black_pieces = []
+        white_pieces = []
         for row in board.board:
             for object in row:
                 if object != None:
-                    locals()['obj' + str(cnt)] = copy(object)
-                    checkmate_board[object.get_y()][object.get_x()] = locals()['obj' + str(cnt)]
-                    if locals()['obj' + str(cnt)].get_color() == king:
-                        obj_list.append(locals()['obj' + str(cnt)])
-                    cnt += 1
-        for obj in obj_list:
-            check_moves = obj.get_moves()
-            for check_move in check_moves:
-                checkmove_board = checkmate_board[:]
-                checkmove_board[obj.get_y() + check_move[1]][obj.get_x() + check_move[0]] = obj
-                obj.set_x(obj.get_x() + check_move[0])
-                obj.set_y(obj.get_y() + check_move[1])
-                checkmove_board[obj.get_y()][obj.get_x()] = None
-                if check_for_check(checkmove_board, king)[0]:
-                    return False
-                obj.set_x(obj.get_x() - check_move[0])
-                obj.set_y(obj.get_y() - check_move[1])
-        return True
-    return False
+                    black_pieces.append(object) if object.get_color() == 'BLACK' else white_pieces.append(object)
+        possible_block = []
+        opp_king = 'WHITE' if king == 'BLACK' else 'BLACK'
+
+#    double_check = check_for_check(board.board, king)
+#    if double_check[0] == True:
+#        cnt = 1
+#        obj_list = []
+#        checkmate_board = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+#        for row in board.board:
+#            for object in row:
+#                if object != None:
+#                    locals()['obj' + str(cnt)] = copy(object)
+#                    checkmate_board[object.get_y()][object.get_x()] = locals()['obj' + str(cnt)]
+#                    if locals()['obj' + str(cnt)].get_color() == king:
+#                        obj_list.append(locals()['obj' + str(cnt)])
+#                    cnt += 1
+#        for obj in obj_list:
+#            check_moves = obj.get_moves()
+#            for check_move in check_moves:
+#                checkmove_board = checkmate_board[:]
+#                checkmove_board[obj.get_y() + check_move[1]][obj.get_x() + check_move[0]] = obj
+#                obj.set_x(obj.get_x() + check_move[0])
+#                obj.set_y(obj.get_y() + check_move[1])
+#                checkmove_board[obj.get_y()][obj.get_x()] = None
+#                if check_for_check(checkmove_board, king)[0]:
+#                    return False
+#                obj.set_x(obj.get_x() - check_move[0])
+#                obj.set_y(obj.get_y() - check_move[1])
+#        return True
+#    return False
 
 def kings_identitfied():
     global black_king_obj, white_king_obj
