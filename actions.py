@@ -103,14 +103,50 @@ def check_for_checkmate(king = None):
     if king != None:
         x_val = black_king_obj.get_x() if king == 'BLACK' else white_king_obj.get_x()
         y_val = black_king_obj.get_y() if king == 'BLACK' else white_king_obj.get_y()
-        black_pieces = []
-        white_pieces = []
+        BLACK_pieces = []
+        WHITE_pieces = []
         for row in board.board:
             for object in row:
                 if object != None:
-                    black_pieces.append(object) if object.get_color() == 'BLACK' else white_pieces.append(object)
+                    BLACK_pieces.append(object) if object.get_color() == 'BLACK' else WHITE_pieces.append(object)
         possible_block = []
         opp_king = 'WHITE' if king == 'BLACK' else 'BLACK'
+
+        for obj in locals()[opp_king + '_pieces']:
+            if isinstance(obj, (pieces.Knight)):
+                if x_val == (obj.get_x() - 2):
+                    if y_val == (obj.get_y() - 1):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                    if y_val == (obj.get_y() + 1):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                elif x_val == (obj.get_x() - 1):
+                    if y_val == (obj.get_y() - 2):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                    if y_val == (obj.get_y() + 2):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                elif x_val == (obj.get_x() + 1):
+                    if y_val == (obj.get_y() - 2):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                    if y_val == (obj.get_y() + 2):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                elif x_val == (obj.get_x() + 2):
+                    if y_val == (obj.get_y() - 1):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+                    if y_val == (obj.get_y() + 1):
+                        possible_block.append((obj.get_x(), obj.get_y()))
+        print(possible_block)
+
+        for checking_block in locals()[king + '_pieces']:
+            checking_list = checking_block.get_moves()
+            for poss_move in checking_list:
+                pm_x = checking_block.get_x() + poss_move[0]
+                pm_y = checking_block.get_y() + poss_move[1]
+                for pb_x, pb_y in possible_block:
+                    if pb_x == pm_x and pb_y == pm_y:
+                        print (checking_block)
+                        return False
+
+        return True
 
 #    double_check = check_for_check(board.board, king)
 #    if double_check[0] == True:
