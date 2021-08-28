@@ -4,9 +4,11 @@ import pieces
 from board import Board as bd
 from actions import action, check_for_check, check_for_checkmate
 
+# create player and add to player board
 player = pieces.Player(0, 0, graphics.PLAYER)
 bd.add_player(player)
 
+# create all the pieces and place on board
 pieces.load_pieces(graphics)
 
 def main():
@@ -15,6 +17,7 @@ def main():
     FPS = 60
     clock = pygame.time.Clock()
 
+    # draw and display graphics every 1/FPS seconds
     def redraw_window():
         graphics.WIN.blit(graphics.BG, (0, 0))
         bd.draw_pieces(graphics.WIN)
@@ -28,10 +31,12 @@ def main():
         clock.tick(FPS)
         redraw_window()
 
+        # if player presses X on corner of screen close game
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
+        # players moves
         keys = pygame.key.get_pressed()
         if keys[pygame.K_DOWN] and player.get_y() != 7 and key_up:
             bd.move_player(player, player.get_x(), player.get_y() + 1)
@@ -51,4 +56,5 @@ def main():
         if event.type == pygame.KEYUP:
             key_up = True
 
-main()
+if __name__ == '__main__':
+    main()
